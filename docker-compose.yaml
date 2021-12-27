@@ -1,0 +1,60 @@
+version: "3.7"
+services:
+
+  front-envoy:
+    image: envoyproxy/envoy-dev
+    command: envoy -c /front-envoy.yaml
+    volumes:
+      - ./envoy/front-envoy.yaml:/front-envoy.yaml
+    networks:
+      - helloworld
+    ports:
+      - "9000:9000"
+      - "8001:8001"
+
+  helloworld.server1:
+    image: helloworld.server
+    networks:
+      - helloworld
+
+  helloworld.server1.proxy:
+    image: envoyproxy/envoy-dev
+    command: envoy -c /service-envoy-1.yaml
+    volumes:
+      - ./envoy/service-envoy-1.yaml:/service-envoy-1.yaml
+    networks:
+      - helloworld
+
+  helloworld.server2:
+    image: helloworld.server
+    networks:
+      - helloworld
+
+  helloworld.server2.proxy:
+    image: envoyproxy/envoy-dev
+    command: envoy -c /service-envoy-2.yaml
+    volumes:
+      - ./envoy/service-envoy-2.yaml:/service-envoy-2.yaml
+    networks:
+      - helloworld
+
+  helloworld.server3:
+    image: helloworld.server
+    networks:
+      - helloworld
+
+  helloworld.server3.proxy:
+    image: envoyproxy/envoy-dev
+    command: envoy -c /service-envoy-3.yaml
+    volumes:
+      - ./envoy/service-envoy-3.yaml:/service-envoy-3.yaml
+    networks:
+      - helloworld
+
+#  helloworld.client:
+#    image: helloworld.client
+#    networks:
+#      - helloworld
+
+networks:
+  helloworld: {}
