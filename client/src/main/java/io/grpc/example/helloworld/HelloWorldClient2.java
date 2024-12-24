@@ -63,6 +63,7 @@ public class HelloWorldClient2 {
         int i = 0;
         while (i++ < 500) {
             helloWorldClient.sayHello();
+            Thread.sleep(1000);
         }
 
         channel.shutdownNow().awaitTermination(5, TimeUnit.MINUTES);

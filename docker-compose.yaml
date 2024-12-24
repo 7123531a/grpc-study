@@ -13,7 +13,11 @@ services:
       - "8001:8001"
 
   helloworld.server1:
-    image: helloworld.server
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+
+#    image: helloworld.server
     networks:
       - helloworld
 

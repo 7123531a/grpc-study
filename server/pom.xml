@@ -31,7 +31,11 @@
                             <descriptors>
                                 <descriptor>src/assemble/distribution.xml</descriptor>
                             </descriptors>
+                            <formats>
+                                <format>zip</format>
+                            </formats>
                         </configuration>
+
                     </execution>
                 </executions>
             </plugin>
